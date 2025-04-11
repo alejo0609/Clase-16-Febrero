@@ -23,7 +23,7 @@ const MapaTiendasGoogle = ({ tiendas, userCoords, lineas = [] }) => {
   console.log("📍 Coordenadas del usuario:", userCoords);
 
   return (
-    <LoadScript googleMapsApiKey="AIzaSyBsecUTtE7TqdZXewlBoz5a0HEXOV5IQic">
+    <LoadScript googleMapsApiKey="">
       {userCoords && (
         <GoogleMap
           mapContainerStyle={containerStyle}
