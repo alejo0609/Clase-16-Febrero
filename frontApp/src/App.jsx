@@ -62,6 +62,8 @@ import QuienesSomos from "./pages/QuienesSomos";
 import FormularioAdopcion from "./components/FormularioAdopcion";
 import RegistroGenerico from "./pages/RegistroGenerico";
 import SeleccionRegistro from "./pages/SeleccionRegistro";
+import MapaTiendasGoogle from './components/MapaTiendasGoogle';
+
 
 import useSession from "./hooks/useSession";
 import useSessionTimeout from "./hooks/useSession";
@@ -96,6 +98,7 @@ function AppWithSession() {
         {/*<Route path="/adopcion/:idAnimal" element={<FormularioAdopcion />} /> */}
         <Route path="/registro" element={<SeleccionRegistro />} />
         <Route path="/registro/:tipo" element={<RegistroGenerico />} />
+        <Route path="/mapa-tiendas" element={<MapaTiendasGoogle />} />
         <Route
                  path="/formulario-adopcion/:idAnimalSeleccionado"
                  element={<FormularioAdopcion />}

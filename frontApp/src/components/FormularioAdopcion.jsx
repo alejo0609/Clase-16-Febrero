@@ -1,12 +1,13 @@
-import React, { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import React, { useState } from "react";
+import { useParams, useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
 
 const FormularioAdopcion = () => {
   const { idAnimal } = useParams();
   const navigate = useNavigate();
+  const location = useLocation();
+  const animal = location.state?.animal;
 
-  const [animal, setAnimal] = useState(null);
   const [formData, setFormData] = useState({
     nombre: "",
     dni: "",
@@ -22,20 +23,6 @@ const FormularioAdopcion = () => {
 
   const [formularioEnviado, setFormularioEnviado] = useState(false);
   const [error, setError] = useState(null);
-
-  useEffect(() => {
-    axios
-      .get(`http://localhost:8080/animal/${idAnimal}`)
-      .then((res) => setAnimal(res.data))
-      .catch(() => {
-        setAnimal({
-          nombre_animal: "Animal de prueba",
-          raza: "Mestizo",
-          edad: "2",
-          imagen_animal: "perro1.jpg",
-        });
-      });
-  }, [idAnimal]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -62,7 +49,13 @@ const FormularioAdopcion = () => {
     }
   };
 
-  if (!animal) return <p className="p-4">Cargando información del animal...</p>;
+  if (!animal) {
+    return (
+      <p className="p-4 text-red-600 font-semibold text-center">
+        No se pudo obtener la información del animal.
+      </p>
+    );
+  }
 
   return (
     <div className="max-w-2xl mx-auto p-6 bg-white rounded-2xl shadow-md mt-6">

@@ -100,6 +100,21 @@
 			<version>5.10.0</version>
 			<scope>test</scope>
 		</dependency>
+		<!-- SendGrid app para enviar emails -->
+
+		<dependency>
+			<groupId>com.sendgrid</groupId>
+			<artifactId>sendgrid-java</artifactId>
+			<version>4.10.1</version>
+		  </dependency>
+
+		  <dependency>
+			<groupId>org.json</groupId>
+			<artifactId>json</artifactId>
+			<version>20220320</version>
+		  </dependency>
+		  
+		
 
 	</dependencies>
 

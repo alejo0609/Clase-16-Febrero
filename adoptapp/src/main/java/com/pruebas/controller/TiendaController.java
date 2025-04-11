@@ -35,8 +35,10 @@ public class TiendaController {
 
     @PostMapping
     public TiendaModel guardar(@RequestBody TiendaModel tienda) {
-        return tiendaService.guardar(tienda);
+        return tiendaService.guardarTienda(tienda); // ✔️ LLAMA AL MÉTODO CORRECTO
     }
+
+    
 
     @DeleteMapping("/{id}")
     public String eliminar(@PathVariable Long id) {

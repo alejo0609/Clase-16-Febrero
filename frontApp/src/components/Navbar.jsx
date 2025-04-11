@@ -22,6 +22,7 @@ function Navbar() {
         <li><Link to="/cuidador" className="hover:text-gray-200 font-bold">Cuidador</Link></li>
         <li><Link to="/contactanos" className="hover:text-gray-200 font-bold">Contáctanos</Link></li>
         
+        
         {/*<li><Link to="/animales" className="hover:text-gray-200 font-bold">Animales</Link></li>*/}
       </ul>
 

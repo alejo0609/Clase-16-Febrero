@@ -47,6 +47,12 @@ public class TiendaModel {
     @Column(nullable = false, length = 100)
     private String barrio;
 
+    @Column(nullable = true)
+    private Double latitud;
+
+    @Column(nullable = true)
+    private Double longitud;
+
  
 }
 

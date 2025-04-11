@@ -1,45 +1,55 @@
- /** 
- * @author Alejandro Perez CC 8.029.742
- * @author Julian David Giraldo Murillo CC 1.007.240.094
- * @author Andres Escobar Vasquez CC 1.038.096.962
- * @author Jorge Andres Restrepo Cataño CC 98.648.720
- **/
- 
 package com.pruebas.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;
+import com.sendgrid.*;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+
+import com.sendgrid.helpers.mail.Mail;
+import com.sendgrid.helpers.mail.objects.Content;
+import com.sendgrid.helpers.mail.objects.Email;
+
+
+import java.io.IOException;
 
 @Service
 public class EmailService {
 
-    @Autowired
-    private JavaMailSender mailSender;
+    @Value("${sendgrid.api.key}")
+    private String sendGridApiKey;
 
-    public void enviarCorreoAgradecimiento(String destinatario, String nombreAnimal) {
+    public void enviarCorreo(String destinatario, String asunto, String contenido) {
+        Email from = new Email("alejo0609@hotmail.com"); // Cambia a tu correo verificado
+        Email to = new Email(destinatario);
+        Content content = new Content("text/plain", contenido);
+        Mail mail = new Mail(from, asunto, to, content);
+
+        SendGrid sg = new SendGrid(sendGridApiKey);
+        Request request = new Request();
+
         try {
-            SimpleMailMessage mensaje = new SimpleMailMessage();
-            mensaje.setTo(destinatario);
-            mensaje.setSubject("Gracias por postularte a la adopción 🐶");
-            mensaje.setText("¡Gracias por postularte para adoptar a " + nombreAnimal + "!\n\n" +
-                    "Nos pondremos en contacto contigo pronto para informarte sobre los próximos pasos.");
+            request.setMethod(Method.POST);
+            request.setEndpoint("mail/send");
+            request.setBody(mail.build());
 
-            mailSender.send(mensaje);
-            System.out.println("Correo de agradecimiento enviado a " + destinatario);
-        } catch (Exception e) {
-            System.err.println("❌ No se pudo enviar el correo a " + destinatario + ": " + e.getMessage());
-            // Aquí puedes también usar un logger si lo prefieres
+            Response response = sg.api(request);
+            System.out.println("✅ Email enviado. Status code: " + response.getStatusCode());
+
+        } catch (IOException e) {
+            System.err.println("❌ Error enviando el email: " + e.getMessage());
         }
     }
 
+    public void enviarCorreoAgradecimiento(String destinatario, String nombreAnimal) {
+        String asunto = "Gracias por postularte a la adopción 🐾";
+        String cuerpo = "¡Gracias por postularte para adoptar a " + nombreAnimal + "!\n\n" +
+                        "Nos pondremos en contacto contigo pronto para informarte sobre los próximos pasos.";
+        enviarCorreo(destinatario, asunto, cuerpo);
+    }
+
     public void enviarCorreoATienda(String correoTienda, String nombreAnimal, String nombreAdoptante) {
-        SimpleMailMessage mensaje = new SimpleMailMessage();
-        mensaje.setTo(correoTienda);
-        mensaje.setSubject("Nueva solicitud de adopción");
-        mensaje.setText("Hola,\n\nSe ha recibido una solicitud de adopción para el animal: " + nombreAnimal +
-            " por parte de: " + nombreAdoptante + ".\n\nPor favor revisa la plataforma para más detalles.");
-        mailSender.send(mensaje);
+        String asunto = "Nueva solicitud de adopción";
+        String cuerpo = "Hola,\n\nSe ha recibido una solicitud de adopción para el animal: " + nombreAnimal +
+                        " por parte de: " + nombreAdoptante + ".\n\nPor favor revisa la plataforma para más detalles.";
+        enviarCorreo(correoTienda, asunto, cuerpo);
     }
 }

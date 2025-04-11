@@ -89,7 +89,8 @@ function RegistroGenerico() {
     let endpoint = "";
     switch (tipo) {
       case "usuario":
-        
+        endpoint = "http://localhost:8080/datos_personales";
+        break;
       case "cuidador":
         endpoint = "http://localhost:8080/datos_personales";
         break;
