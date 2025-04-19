@@ -29,19 +29,17 @@ public class TiendaController {
     }
 
     @GetMapping("/{id}")
-    public Optional<TiendaModel> obtenerPorId(@PathVariable Long id) {
+    public Optional<TiendaModel> obtenerPorId(@PathVariable Integer id) {
         return tiendaService.obtenerPorId(id);
     }
 
     @PostMapping
     public TiendaModel guardar(@RequestBody TiendaModel tienda) {
-        return tiendaService.guardarTienda(tienda); // ✔️ LLAMA AL MÉTODO CORRECTO
+        return tiendaService.guardar(tienda);
     }
 
-    
-
     @DeleteMapping("/{id}")
-    public String eliminar(@PathVariable Long id) {
+    public String eliminar(@PathVariable Integer id) {
         return tiendaService.eliminar(id) ? "Eliminado correctamente" : "No se encontró la tienda con ese ID";
     }
 }

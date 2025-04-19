@@ -1,4 +1,3 @@
-
 package com.pruebas.service;
 
 import com.pruebas.model.AdopcionModel;
@@ -10,6 +9,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Optional;
 
@@ -33,38 +33,51 @@ public class AdopcionServiceTest {
 
     @Test
     public void testGuardarAdopcionYEnvioCorreo() {
-        // Datos de prueba
-        AdopcionModel adopcion = new AdopcionModel();
-        adopcion.setCorreo("prueba@example.com");
-        adopcion.setIdAnimal(1);
-
+        // Crear y configurar el objeto AnimalModel
         AnimalModel animal = new AnimalModel();
         animal.setIdAnimal(1);
         animal.setNombreAnimal("Firulais");
 
+        // Crear el objeto AdopcionModel y configurar el correo
+        AdopcionModel adopcion = new AdopcionModel();
+        adopcion.setCorreo("prueba@example.com");
+        adopcion.setAnimal(animal);  // Establecer el animal en la adopción
+
+        // Configuración de los mocks
         when(animalRepository.findById(1)).thenReturn(Optional.of(animal));
         when(adopcionRepository.save(adopcion)).thenReturn(adopcion);
 
+        // Ejecutar el método
         AdopcionModel resultado = adopcionService.guardarAdopcion(adopcion);
 
+        // Verificar que los métodos fueron llamados
         verify(adopcionRepository).save(adopcion);
         verify(emailService).enviarCorreoAgradecimiento("prueba@example.com", "Firulais");
+
+        // Verificar el resultado
         assertEquals(adopcion, resultado);
     }
 
     @Test
-        public void testGuardarAdopcionCuandoAnimalNoExisteLanzaExcepcion() {
-            AdopcionModel adopcion = new AdopcionModel();
-            adopcion.setIdAnimal(999); // ID que no existe
+    public void testGuardarAdopcionCuandoAnimalNoExisteLanzaExcepcion() {
+        // Crear el objeto de adopción
+        AdopcionModel adopcion = new AdopcionModel();
 
-            when(animalRepository.findById(999)).thenReturn(Optional.empty());
+        // Crear y configurar un animal con ID inexistente
+        AnimalModel animal = new AnimalModel();
+        animal.setIdAnimal(999); // ID que no existe
+        adopcion.setAnimal(animal);
 
-            RuntimeException exception = assertThrows(RuntimeException.class, () -> {
-                adopcionService.guardarAdopcion(adopcion);
-            });
+        // Simular que no se encuentra el animal
+        when(animalRepository.findById(999)).thenReturn(Optional.empty());
 
-            assertEquals("Animal no encontrado", exception.getMessage());
-        }
+        // Ejecutar y verificar la excepción
+        ResponseStatusException exception = assertThrows(ResponseStatusException.class, () -> {
+            adopcionService.guardarAdopcion(adopcion);
+        });
+
+        assertEquals("404 NOT_FOUND \"Animal no encontrado\"", exception.getMessage());
+    }
+
 
 }
-

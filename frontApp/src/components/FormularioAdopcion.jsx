@@ -8,6 +8,7 @@ const FormularioAdopcion = () => {
   const location = useLocation();
   const animal = location.state?.animal;
 
+  // Asegúrate de agregar idTienda aquí en el estado
   const [formData, setFormData] = useState({
     nombre: "",
     dni: "",
@@ -18,7 +19,12 @@ const FormularioAdopcion = () => {
     ocupacion: "",
     tipoVivienda: "",
     motivoAdopcion: "",
-    idAnimal: idAnimal,
+    animal: {
+      idAnimal: animal.idAnimal
+    },
+    tienda: {
+      id: animal.tienda.id  // Aquí pasas el id de la tienda desde el objeto animal
+    }
   });
 
   const [formularioEnviado, setFormularioEnviado] = useState(false);

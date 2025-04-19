@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { GoogleMap, LoadScript, Marker, DirectionsService, DirectionsRenderer } from "@react-google-maps/api";
 
 // 👉 API Key de Google Maps (Asegúrate de que Directions API esté habilitada)
-const GOOGLE_MAPS_API_KEY = "TU_API_KEY_AQUI";
+const GOOGLE_MAPS_API_KEY = "AIzaSyBsecUTtE7TqdZXewlBoz5a0HEXOV5IQic";
 
 // Estilos del mapa
 const containerStyle = {

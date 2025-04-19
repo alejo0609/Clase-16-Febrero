@@ -7,7 +7,7 @@
  * @returns {Promise<string>} - Duración estimada en texto (por ejemplo, "12 mins") o mensaje de error
  */
  export async function calcularDistanciaGoogle(origen, destino) {
-    const apiKey = ""; // 🔐 Reemplázala con tu clave
+    const apiKey = "AIzaSyBsecUTtE7TqdZXewlBoz5a0HEXOV5IQic"; // 🔐 Reemplázala con tu clave
   
     const url = `https://maps.googleapis.com/maps/api/distancematrix/json?origins=${origen.lat},${origen.lon}&destinations=${destino.lat},${destino.lon}&mode=driving&key=${apiKey}`;
   

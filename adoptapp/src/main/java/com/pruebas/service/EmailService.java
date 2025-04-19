@@ -41,10 +41,11 @@ public class EmailService {
 
     public void enviarCorreoAgradecimiento(String destinatario, String nombreAnimal) {
         String asunto = "Gracias por postularte a la adopción 🐾";
-        String cuerpo = "¡Gracias por postularte para adoptar a " + nombreAnimal + "!\n\n" +
+        String cuerpo = "¡Gracias por postularte para adoptar a " + nombreAnimal + "!\n\n" + 
                         "Nos pondremos en contacto contigo pronto para informarte sobre los próximos pasos.";
         enviarCorreo(destinatario, asunto, cuerpo);
     }
+
 
     public void enviarCorreoATienda(String correoTienda, String nombreAnimal, String nombreAdoptante) {
         String asunto = "Nueva solicitud de adopción";

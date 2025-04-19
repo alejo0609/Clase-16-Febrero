@@ -10,6 +10,8 @@ package com.pruebas.model;
 import jakarta.persistence.*;
 import lombok.*;
 import java.util.List;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 
 
 @Entity
@@ -21,7 +23,7 @@ public class TiendaModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
     @Column(nullable = false, length = 100)
     private String nombre;
@@ -33,7 +35,8 @@ public class TiendaModel {
     private String telefono;
 
     @Column(nullable = false, length = 100)
-    private String correo_electronico;
+    @JsonProperty("correo_electronico")
+    private String correoElectronico;
 
     @Column(nullable = true, length = 100)
     private String sitio_web;
@@ -52,6 +55,7 @@ public class TiendaModel {
 
     @Column(nullable = true)
     private Double longitud;
+    
 
  
 }

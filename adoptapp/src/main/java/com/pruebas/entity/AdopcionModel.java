@@ -51,10 +51,16 @@ public class AdopcionModel {
     private String motivoAdopcion;
 
 
-    @Column(name = "id_animal",nullable = false)
-    private Integer idAnimal; // Clave foránea (aunque aún no hay relación directa)
+    // @Column(name = "id_animal",nullable = false)
+    // private Integer idAnimal; // Clave foránea (aunque aún no hay relación directa)
 
     @Column(nullable = false)
     private Boolean aprobado = false; // Inicialmente no aprobado
+
+    // RELACIONES
+
+    @ManyToOne
+    @JoinColumn(name = "animal_id")
+    private AnimalModel animal;
 
 }

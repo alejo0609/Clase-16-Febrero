@@ -7,6 +7,7 @@ import {
   InfoWindow,
   Polyline,
 } from "@react-google-maps/api";
+import TiendaCard from "./TiendaCard";
 
 const MapaTiendasGoogle = ({ tiendas, userCoords, lineas = [] }) => {
   const [infoTienda, setInfoTienda] = useState(null);
@@ -23,7 +24,7 @@ const MapaTiendasGoogle = ({ tiendas, userCoords, lineas = [] }) => {
   console.log("📍 Coordenadas del usuario:", userCoords);
 
   return (
-    <LoadScript googleMapsApiKey="">
+    <LoadScript googleMapsApiKey="AIzaSyBsecUTtE7TqdZXewlBoz5a0HEXOV5IQic">
       {userCoords && (
         <GoogleMap
           mapContainerStyle={containerStyle}
@@ -37,7 +38,7 @@ const MapaTiendasGoogle = ({ tiendas, userCoords, lineas = [] }) => {
           {tiendasConCoordenadas.map((tienda, index) => (
             <Marker
               key={index}
-              position={{ lat: tienda.latitud, lng: tienda.longitud }}
+              position={{ lat: tienda.latitud, lng: tienda.longitud }} label={tienda.nombre}
               onClick={() => setInfoTienda(tienda)}
             />
           ))}

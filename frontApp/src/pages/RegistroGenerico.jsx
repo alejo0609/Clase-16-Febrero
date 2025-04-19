@@ -89,8 +89,7 @@ function RegistroGenerico() {
     let endpoint = "";
     switch (tipo) {
       case "usuario":
-        endpoint = "http://localhost:8080/datos_personales";
-        break;
+        
       case "cuidador":
         endpoint = "http://localhost:8080/datos_personales";
         break;
@@ -136,19 +135,20 @@ function RegistroGenerico() {
             <Input label="Confirmar Contraseña" name="confirm_password" type="password" value={formData.confirm_password} onChange={handleChange} />
           </>
         );
-      case "tienda":
-        return (
-          <>
-            <Input label="Nombre de la tienda" name="nombre" value={formData.nombre} onChange={handleChange} />
-            <Input label="Dirección" name="direccion" value={formData.direccion} onChange={handleChange} />
-            <Input label="Barrio" name="barrio" value={formData.barrio} onChange={handleChange} />
-            <Input label="Ciudad" name="ciudad" value={formData.ciudad} onChange={handleChange} />
-            <Input label="Teléfono" name="telefono" value={formData.telefono} onChange={handleChange} />
-            <Input label="Correo Electrónico" name="email" type="email" value={formData.email} onChange={handleChange} />
-            <Input label="Sitio Web" name="sitio_web" value={formData.sitio_web} onChange={handleChange} />
-            <Input label="Contraseña" name="password" type="password" value={formData.password} onChange={handleChange} />
-          </>
-        );
+        case "tienda":
+          return (
+            <>
+              <Input label="Nombre de la tienda" name="nombre" value={formData.nombre} onChange={handleChange} />
+              <Input label="Dirección" name="direccion" value={formData.direccion} onChange={handleChange} />
+              <Input label="Barrio" name="barrio" value={formData.barrio} onChange={handleChange} />
+              <Input label="Ciudad" name="ciudad" value={formData.ciudad} onChange={handleChange} />
+              <Input label="Teléfono" name="telefono" value={formData.telefono} onChange={handleChange} />
+              <Input label="Correo Electrónico" name="correo_electronico" type="email" value={formData.correo_electronico} onChange={handleChange} />
+              <Input label="Sitio Web" name="sitio_web" value={formData.sitio_web} onChange={handleChange} />
+              <Input label="Contraseña" name="password" type="password" value={formData.password} onChange={handleChange} />
+            </>
+          );
+        
       case "mascota":
         return (
           <>

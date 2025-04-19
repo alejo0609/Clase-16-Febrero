@@ -14,6 +14,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 
 public interface AdopcionRepository extends JpaRepository<AdopcionModel, Integer> {
+    long countByAnimal_IdAnimal(Integer idAnimal);
+    
+    
 
 }
 

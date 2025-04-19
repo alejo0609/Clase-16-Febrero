@@ -100,9 +100,9 @@ function AppWithSession() {
         <Route path="/registro/:tipo" element={<RegistroGenerico />} />
         <Route path="/mapa-tiendas" element={<MapaTiendasGoogle />} />
         <Route
-                 path="/formulario-adopcion/:idAnimalSeleccionado"
-                 element={<FormularioAdopcion />}
-               />
+                path="/formulario-adopcion/:idAnimalSeleccionado"
+                element={<FormularioAdopcion />}
+              />
       </Routes>
       <Footer />
     </>
