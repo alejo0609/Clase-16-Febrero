@@ -31,3 +31,7 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### IGNORAR ###
+/Users/Alejandro/JavaTalento/adoptapp/src/main/resources/application.properties
+
