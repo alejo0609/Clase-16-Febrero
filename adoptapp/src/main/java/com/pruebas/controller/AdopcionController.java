@@ -56,6 +56,16 @@ public ResponseEntity<?> getAllAdopcions() {
     public Optional<AdopcionModel> getAdopcionById(@PathVariable Integer id) {
         return adopcionService.findById(id);
     }
+    //Buscar el animal que este asociado a una adopcion
+    @GetMapping("/{id}/animal")
+        public ResponseEntity<?> obtenerAnimalPorAdopcion(@PathVariable Integer id) {
+            Optional<AdopcionModel> adopcion = adopcionService.findById(id);
+            if (adopcion.isPresent()) {
+                return ResponseEntity.ok(adopcion.get().getAnimal());
+            } else {
+                return ResponseEntity.status(404).body("Adopción no encontrada");
+            }
+        }
 
     /**
     * Registra una nueva adopción y envía un correo de agradecimiento.
