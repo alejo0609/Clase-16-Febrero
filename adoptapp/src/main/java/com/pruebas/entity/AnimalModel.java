@@ -46,9 +46,11 @@ public class AnimalModel {
     @Column(name = "correo_tienda")
     private String correoTienda;
 
-
-
-    
+// - - - - - RELACIONES - - - - -
+    // Muchos animales pueden pertenecer a una tienda por ejemplo
+    @ManyToOne
+    @JoinColumn(name = "tienda_id") // clave foránea en la tabla "animal"
+    private TiendaModel tienda;
 
    
 

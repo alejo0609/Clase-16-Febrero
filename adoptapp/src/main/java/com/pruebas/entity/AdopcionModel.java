@@ -57,10 +57,15 @@ public class AdopcionModel {
     @Column(nullable = false)
     private Boolean aprobado = false; // Inicialmente no aprobado
 
-    // RELACIONES
-
+    // RELACIONES CON ANIMAL
     @ManyToOne
     @JoinColumn(name = "animal_id")
     private AnimalModel animal;
+
+    // Relacion con tienda; esta buena solo hace falta descomentar las linea de abajo
+    // RELACIONES CON TIENDA
+    // @ManyToOne
+    // @JoinColumn(name = "tienda_id")
+    // private TiendaModel tienda;
 
 }

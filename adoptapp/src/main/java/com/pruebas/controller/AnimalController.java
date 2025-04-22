@@ -1,8 +1,6 @@
  /** 
  * @author Alejandro Perez CC 8.029.742
- * @author Julian David Giraldo Murillo CC 1.007.240.094
  * @author Andres Escobar Vasquez CC 1.038.096.962
- * @author Jorge Andres Restrepo Cataño CC 98.648.720
  **/
 
 package com.pruebas.controller;
@@ -11,6 +9,7 @@ import com.pruebas.model.AnimalModel;
 import com.pruebas.service.AnimalService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 import java.util.Optional;
@@ -78,10 +77,22 @@ public List<AnimalModel> buscarPorRaza(@PathVariable String raza) {
 public List<AnimalModel> buscarEsterilizados() {
     return animalService.buscarEsterilizados();
 }
+// Buscar animal por edad
 @GetMapping("/buscar/edad/{edad}")
 public List<AnimalModel> buscarPorEdad(@PathVariable String edad) {
     return animalService.buscarPorEdad(edad);
 }
+
+// - - - - - Buscar la tienda que esta asociado a un animal - - - - -
+@GetMapping("/{id}/tienda")
+    public ResponseEntity<?> obtenerTiendaPorAdopcion(@PathVariable Integer id) {
+        Optional<AnimalModel> animal = animalService.findById(id);
+        if (animal.isPresent()) {
+            return ResponseEntity.ok(animal.get().getTienda());
+        } else {
+            return ResponseEntity.status(404).body("Tienda no encontrada");
+        }
+    }
 
 
 

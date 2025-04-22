@@ -4,6 +4,7 @@ import axios from "axios";
 
 const FormularioAdopcion = () => {
   const { idAnimal } = useParams();
+  const { id } = useParams();
   const navigate = useNavigate();
   const location = useLocation();
   const animal = location.state?.animal;
@@ -18,14 +19,12 @@ const FormularioAdopcion = () => {
     correo: "",
     ocupacion: "",
     tipoVivienda: "",
-    motivoAdopcion: "",
-    animal: {
-      idAnimal: animal.idAnimal
-    },
-    tienda: {
-      id: animal.tienda.id  // Aquí pasas el id de la tienda desde el objeto animal
-    }
+    motivoAdopcion: ""
   });
+
+ 
+    
+ 
 
   const [formularioEnviado, setFormularioEnviado] = useState(false);
   const [error, setError] = useState(null);
@@ -40,9 +39,20 @@ const FormularioAdopcion = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    
+    
+  
+    const dataToSend = {
+      ...formData,
+      animal: {
+        idAnimal: animal?.idAnimal
+      }
+      
+    };
+    console.log("Enviando:", dataToSend);
+  
     try {
-      const response = await axios.post("http://localhost:8080/adopcion", formData);
+      const response = await axios.post("http://localhost:8080/adopcion", dataToSend);
       if (response.status === 200) {
         setFormularioEnviado(true);
         setError(null);
@@ -52,8 +62,11 @@ const FormularioAdopcion = () => {
       }
     } catch (err) {
       setError("Error al enviar el formulario. Intenta nuevamente.");
+      console.error(err);
+      console.error("Error:", err.response?.data || err.message);
     }
   };
+  
 
   if (!animal) {
     return (

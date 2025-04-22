@@ -20,7 +20,9 @@ public class EmailService {
     public void enviarCorreo(String destinatario, String asunto, String contenido) {
         Email from = new Email("alejo0609@hotmail.com"); // Cambia a tu correo verificado
         Email to = new Email(destinatario);
-        Content content = new Content("text/plain", contenido);
+        //Content content = new Content("text/plain", contenido);
+        Content content = new Content("text/html", contenido);
+
         Mail mail = new Mail(from, asunto, to, content);
 
         SendGrid sg = new SendGrid(sendGridApiKey);
@@ -38,19 +40,39 @@ public class EmailService {
             System.err.println("❌ Error enviando el email: " + e.getMessage());
         }
     }
-
+    //Corre para la persona que se postula para una adopcion
     public void enviarCorreoAgradecimiento(String destinatario, String nombreAnimal) {
         String asunto = "Gracias por postularte a la adopción 🐾";
-        String cuerpo = "¡Gracias por postularte para adoptar a " + nombreAnimal + "!\n\n" + 
-                        "Nos pondremos en contacto contigo pronto para informarte sobre los próximos pasos.";
+        String cuerpo = "<div style='font-family: Arial, sans-serif; font-size: 15px; color: #333;'>"
+                + "<p><strong>¡Gracias por postularte para adoptar a " + nombreAnimal + "!</strong></p>"
+                + "<p>Tu solicitud ha sido recibida y está siendo revisada. 📝</p>"
+                + "<p>Nos pondremos en contacto contigo pronto. ¡Gracias por darle una oportunidad a un peludito! 🐾</p>"
+                + "</div>";
+
+
         enviarCorreo(destinatario, asunto, cuerpo);
     }
 
 
-    public void enviarCorreoATienda(String correoTienda, String nombreAnimal, String nombreAdoptante) {
+    public void enviarCorreoATienda(String correoTienda, String nombreAnimal, String nombreAdoptante, 
+                                    String telefonoAdoptante, String  emailAdoptante) {
         String asunto = "Nueva solicitud de adopción";
-        String cuerpo = "Hola,\n\nSe ha recibido una solicitud de adopción para el animal: " + nombreAnimal +
-                        " por parte de: " + nombreAdoptante + ".\n\nPor favor revisa la plataforma para más detalles.";
+        String cuerpo = "<div style='font-family: Arial, sans-serif; font-size: 15px; color: #333;'>"
+                + "<p>Hola,</p>"
+                + "<p>Se ha recibido una solicitud de adopción para el animal:</p>"
+                + "<p style='font-size: 16px; font-weight: bold;'>" + nombreAnimal + "</p>"
+                //+ "<img src='" + fotoAnimal + "' alt=' Foto de " + nombreAnimal + "' style='max-width: 100%; height: auto; border-radius: 8px; margin-bottom: 20px;'><br>"
+                //+ "<p><strong>Raza:</strong>"+ raza + "</p>> <br>"
+                + "<hr style='border: none; border-top: 1px solid #ccc;'>"
+                + "<p><strong>🧍 ADOPTANTE POSTULADO:</strong></p>"
+                + "<p><strong>Nombre:</strong> " + nombreAdoptante + "<br>"
+                + "<strong>Teléfono:</strong> " + telefonoAdoptante + "<br>"
+                + "<strong>Email:</strong> " + emailAdoptante + "</p>"
+                + "<hr style='border: none; border-top: 1px solid #ccc;'>"
+                + "<p>Por favor revisa la plataforma para más detalles.</p>"
+                + "</div>";
+
+
         enviarCorreo(correoTienda, asunto, cuerpo);
     }
 }
