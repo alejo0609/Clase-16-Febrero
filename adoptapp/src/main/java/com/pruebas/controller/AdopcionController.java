@@ -2,6 +2,7 @@ package com.pruebas.controller;
 
 import com.pruebas.model.AdopcionModel;
 import com.pruebas.service.AdopcionService;
+import com.pruebas.repository.AdopcionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
@@ -25,6 +26,10 @@ public class AdopcionController {
 
     @Autowired
     private AdopcionService adopcionService;
+
+    @Autowired
+    private AdopcionRepository adopcionRepository;
+
 
     /**
      * Obtiene todas las adopciones registradas.
@@ -60,6 +65,12 @@ public class AdopcionController {
             } else {
                 return ResponseEntity.status(404).body("Adopción no encontrada");
             }
+        }
+
+// - - - - - Devuelve el numero de postulaciones de adopcion que tiene un animal - - - - -
+    @GetMapping("/totalPostulaciones/{idAnimal}")
+        public long contarPostulacionesPorAnimal(@PathVariable Integer idAnimal) {
+            return adopcionRepository.countByAnimal_IdAnimal(idAnimal);
         }
 
 // - - - - - Buscar la tienda que esta asociado a una adopcion con un determinado animal - - - - -
