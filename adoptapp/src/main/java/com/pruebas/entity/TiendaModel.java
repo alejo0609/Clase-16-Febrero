@@ -56,6 +56,9 @@ public class TiendaModel {
     @Column(nullable = true)
     private Double longitud;
     
+    // // RELACION CON ANIMAL
+    // @OneToMany(mappedBy = "tienda", cascade = CascadeType.ALL)
+    // private List<AnimalModel> animales;
 
  
 }

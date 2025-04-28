@@ -20,10 +20,13 @@ public class RolesModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idRoles;
 
+    @Column(nullable = false, length = 50)
+    private String nombre;  // Ejemplo: "TIENDA", "ADMIN", etc.
+
     @Column(nullable = false)
     private LocalDateTime creado; 
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private LocalDateTime modificado; 
 
 }

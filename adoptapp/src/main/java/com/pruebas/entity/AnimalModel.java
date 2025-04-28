@@ -52,7 +52,7 @@ public class AnimalModel {
     @JoinColumn(name = "tienda_id") // clave foránea en la tabla "animal"
     private TiendaModel tienda;
 
-   
+
 
 
 }
