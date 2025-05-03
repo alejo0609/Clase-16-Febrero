@@ -1,7 +1,4 @@
- /** 
- * @author Alejandro Perez CC 8.029.742
- * @author Andres Escobar Vasquez CC 1.038.096.962
- **/
+
  
 package com.pruebas.model;
 import com.fasterxml.jackson.annotation.JsonProperty;
