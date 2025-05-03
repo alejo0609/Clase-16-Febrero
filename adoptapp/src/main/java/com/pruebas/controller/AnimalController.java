@@ -83,7 +83,7 @@ public List<AnimalModel> buscarPorEdad(@PathVariable String edad) {
     return animalService.buscarPorEdad(edad);
 }
 
-// - - - - - Buscar la tienda que esta asociado a un animal - - - - -
+// - - - - - Busca la tienda que esta asociada a un animal - - - - -
 @GetMapping("/{id}/tienda")
     public ResponseEntity<?> obtenerTiendaPorAdopcion(@PathVariable Integer id) {
         Optional<AnimalModel> animal = animalService.findById(id);

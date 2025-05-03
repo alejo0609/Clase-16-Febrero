@@ -77,7 +77,7 @@ public class AnimalService {
         return animalRepository.findById(id);
     }
 
-    // ✅ Crear o actualiza un animal
+    // ✅ Crear o actualiza un animal, al mismo tiempo relaciona la tienda al animal
     public AnimalModel save(AnimalModel animal) {
         Optional<TiendaModel> tienda = tiendaRepository.findById(animal.getTienda().getId());
         return animalRepository.save(animal);

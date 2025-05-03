@@ -19,6 +19,7 @@ public class DatosPersonalesService {
 
     @Autowired
     private DatosPersonalesRepository datosPersonalesRepository;
+    
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
 
